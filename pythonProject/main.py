@@ -1,22 +1,19 @@
-
 def solution(array, commands):
     answer = []
     for command in commands:
         i, j, k = command[0], command[1], command[2]
-        slice=array[i-1:j]
+        slice=array[i-1:j] #j는 -1 안해주는 이유는 끝에 하나를 안쳐준다.
+        #slice.sort()
         sort(slice)
         answer.append(slice[k-1])
-
     print(answer)
     return answer
 
 def sort(array):
-    for array_num in array:
-        for array_o_num in array:
-            if array_num > array_o_num:
-                temp = array_o_num
-                array_num = array_o_num
-                array_o_num = temp
+    for i in range(0, len(array)): #range는 0~len(array-1)까지 뽑음 0, 1, 2, 3
+        for j in range(i, len(array)):
+            if array[i] > array[j]:
+                array[i], array[j] = array[j], array[i]
     return array
 
 if __name__ == '__main__':
