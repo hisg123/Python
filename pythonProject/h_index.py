@@ -19,6 +19,11 @@ def solution(citations):
     h_index = max(h_index_array)
     return h_index
 
+# def solution(citations):
+#     citations.sort(reverse=True)
+#     answer = max(map(min, enumerate(citations, start=1)))
+#     return answer
+
 if __name__ == '__main__':
     solution([3,0,6,1,5])
     solution([2,1,1,1,0])
