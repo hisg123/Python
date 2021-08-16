@@ -3,40 +3,46 @@ def solution(scores):
     temp = [[0 for col in range(len(scores))] for row in range(len(scores))]
     result = ""
 
+    ##inverse row and column
     for i in range(len(scores)):
         for j in range(len(scores)):
             temp[i][j] = scores[j][i]
 
-    #problem
+    ##find if the same min or max number
     for i in range(len(temp)):
         cnt = 0
+
+        #if temp[i][i] is max or min number
         if temp[i][i] == min(temp[i]) or temp[i][i] == max(temp[i]):
             cnt = cnt + 1
-            print(temp[i][i], cnt)
 
+            # if not only one max or min num
             for j in range(0, len(temp)):
                 if temp[i][i] == temp[i][j] and j != i:
                     cnt = 0
-                    print(temp[i][i], temp[i][j], cnt)
 
-            if cnt == 1:
-                temp[i][i] = 101
+            # mark if temp[i][i] is only min or max number
+            if cnt == 1: temp[i][i] = 101
 
+    ##calculate average
     for i in range(len(temp)):
         cnt = 0
         sum = 0
+
+        #if temp[i][i] is marked
         if temp[i][i] == 101:
             cnt = cnt + 1
             for j in range(len(temp)):
                 sum = sum + temp[i][j]
 
+        #else temp[i][i] is unmarked
         else:
             for j in range(len(temp)):
                 sum = sum + temp[i][j]
 
         temp_array.append((sum-101*cnt)/(len(temp)-cnt))
-        print(temp[i], sum, temp_array)#
 
+    ##give grade to each average
     for i in range(len(temp_array)):
         if temp_array[i] >= 90: result = result + 'A'
         if temp_array[i] >= 80 and temp_array[i] < 90: result = result + 'B'
@@ -44,7 +50,6 @@ def solution(scores):
         if temp_array[i] >= 50 and temp_array[i] < 70: result = result + 'D'
         if temp_array[i] < 50: result = result + 'F'
 
-    print(result)#
     return result
 
 if __name__ == '__main__':
