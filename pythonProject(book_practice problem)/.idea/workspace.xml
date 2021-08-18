@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d009355-905c-4aca-99b7-9f6b63c223fc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/92p_big_num_rule.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +47,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/92p_big_num_rule.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pythonProject(programmers)" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -89,7 +88,9 @@
       <option name="presentableId" value="Default" />
       <updated>1629100208981</updated>
       <workItem from="1629100230934" duration="30000" />
-      <workItem from="1629200291384" duration="1462000" />
+      <workItem from="1629200291384" duration="1463000" />
+      <workItem from="1629202548307" duration="15000" />
+      <workItem from="1629202564679" duration="8000" />
     </task>
     <servers />
   </component>
@@ -113,26 +114,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="828" y="174" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1629200395964" />
-    <state x="1154" y="274" key="FileChooserDialogImpl" timestamp="1629200394990">
+    <state x="1154" y="274" key="FileChooserDialogImpl" timestamp="1629202571627">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1154" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1629200394990" />
-    <state width="914" height="279" key="GridCell.Tab.0.bottom" timestamp="1629201150029">
+    <state x="1154" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1629202571627" />
+    <state width="914" height="279" key="GridCell.Tab.0.bottom" timestamp="1629202470399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1629201150029" />
-    <state width="914" height="279" key="GridCell.Tab.0.center" timestamp="1629201150028">
+    <state width="914" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1629202470399" />
+    <state width="914" height="279" key="GridCell.Tab.0.center" timestamp="1629202470399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1629201150028" />
-    <state width="914" height="279" key="GridCell.Tab.0.left" timestamp="1629201150028">
+    <state width="914" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1629202470399" />
+    <state width="914" height="279" key="GridCell.Tab.0.left" timestamp="1629202470399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1629201150028" />
-    <state width="914" height="279" key="GridCell.Tab.0.right" timestamp="1629201150028">
+    <state width="914" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1629202470399" />
+    <state width="914" height="279" key="GridCell.Tab.0.right" timestamp="1629202470399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1629201150028" />
+    <state width="914" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1629202470399" />
     <state x="1103" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1629200999302">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
