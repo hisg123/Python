@@ -12,27 +12,25 @@ def solution(progresses, speeds):
         else:
             temp_list[i] = temp_list[i] // speeds[i]
 
-    print(temp_list)
-
     cnt = 0
     max_temp = temp_list[0]
     i = 0
+
+    #calculate answer(=return)
     while(i!=len(temp_list)):
         if temp_list[i] <= max_temp:
             cnt += 1
-            print("<=",i ,max_temp, temp_list[i], cnt)
+            if i == len(temp_list)-1:
+                answer.append(cnt)
 
         if temp_list[i] > max_temp:
             max_temp = temp_list[i]
             answer.append(cnt)
-            print(i, max_temp, temp_list[i] ,cnt)
             cnt = 0
-
+            i -=1
 
         i += 1
 
-
-    print(answer)
     return answer
 
 if __name__ == '__main__':
