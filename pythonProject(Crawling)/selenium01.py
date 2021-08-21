@@ -1,7 +1,6 @@
 from selenium import webdriver
-import csv
-from urllib.request import urlopen
-from urllib.parse import quote_plus
+from openpyxl import Workbook
+from openpyxl.styles import Alignment, Font, Border, Side, PatternFill
 
 driver = webdriver.Chrome()
 url = 'https://www.naver.com'
@@ -12,7 +11,6 @@ driver.find_element_by_xpath('//button[@class="btn_submit"]').click()
 driver.find_element_by_xpath('//body/div[@id="wrap"]/div[@id="header_wrap"]/div[1]/div[2]/div[1]/div[1]/ul[1]/li[2]/a[1]').click()
 driver.find_element_by_xpath('//body/div[@id="wrap"]/div[@id="container"]/div[@id="content"]/div[@id="main_pack"]/div[@id="snb"]/div[1]/div[1]/div[1]/a[2]').click()
 
-cnt = 10
 span_list = []
 span_temp = []
 press_list = []
@@ -22,6 +20,7 @@ title_temp = []
 context_list = []
 context_temp = []
 
+cnt = 10
 while(cnt!=0):
     #span
     span_list = driver.find_elements_by_xpath('//span[@class="info"]')
@@ -54,10 +53,25 @@ for i in range(len(press_temp)):
     temp[i].append(title_temp[i])
     temp[i].append(context_temp[i])
 
-f = open('앰코코리아.csv', 'w', encoding='utf-8', newline ='')
-csvWriter = csv.writer(f)
-for i in temp:
-    csvWriter.writerow(i)
+# control size of row and column
+write_wb = Workbook()
+write_ws = write_wb.active
 
-f.close()
-print('완료')
+write_ws.column_dimensions['A'].width = 10
+write_ws.column_dimensions['B'].width = 30
+write_ws.column_dimensions['C'].width = 80
+write_ws.column_dimensions['D'].width = 200
+
+for i in range(1,5):
+    cell = write_ws.cell(row=1, column=i)
+    cell.alignment = Alignment(horizontal='center')
+
+write_ws['A1'] = '시간'
+write_ws['B1'] = '언론사'
+write_ws['C1'] = '제목'
+write_ws['D1'] = '내용'
+
+for i in temp:
+    write_ws.append(i)
+
+write_wb.save('C:/Users/USER/PycharmProjects/pythonProject(Crawling)/인텔.xlsx')
