@@ -14,7 +14,6 @@ def solution(prices):
         answer.append(cnt)
     return answer
 
-
 if __name__ == '__main__':
     solution([1, 2, 3, 2, 3])
     solution([3,1,1])
