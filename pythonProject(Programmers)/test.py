@@ -1,49 +1,40 @@
-from collections import deque
-
-
-def solution(bridge_length, weight, truck_weights):
+def solution(name):
     answer = 0
-    bridge = [0] * bridge_length
-    bridge = deque(bridge)
-    truck_weights = deque(truck_weights)
-    sum_bridge = 0
+    name_list = list(name)
+    alphabet = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
-    # bridge 배열이 []가 될때까지 반복
-    while bridge:
-        # 만약 truck이 bridge에 들어갈 수 있는 상태라면
-        if truck_weights and sum_bridge + truck_weights[0] <= weight:
-            truck = truck_weights.popleft()
-            sum_bridge += truck
-            bridge.append(truck)
+    X_idx = [i for i in range(len(name_list)) if not 'A' in name_list[i]]
+    A_idx = [i for i in range(len(name_list)) if 'A' in name_list[i]]
 
-            temp = bridge.popleft()
-            sum_bridge -= temp
+    for i in name_list:
+        answer += min(alphabet.index(i), 25 - alphabet.index(i) + 1)
 
-        # truck이 bridge에 들어갈 수 없는 상태라면
+    if A_idx == []:
+        answer += X_idx[-1]
+        return answer
+
+    if X_idx == []:
+        return answer
+
+    if A_idx[-1] > X_idx[-1]:
+        answer += min(X_idx[-1], A_idx[-1] - X_idx[0] + 1)
+        return answer
+
+    if A_idx[-1] < X_idx[-1]:
+        if A_idx[0] >= 2 and A_idx[0] + len(A_idx) - 1 == A_idx[-1]:
+            answer += min(X_idx[-1], len(X_idx))
+            return answer
         else:
-            temp = bridge.popleft()
-            sum_bridge -= temp
-
-            # 만약 truck_weights 배열이 []가 아니라면
-            if truck_weights:
-                # 하나 팝하자마자 바로 드갈 수 있는 상태라면
-                if sum_bridge + truck_weights[0] <= weight:
-                    truck = truck_weights.popleft()
-                    sum_bridge += truck
-                    bridge.append(truck)
-
-                # 하나 팝해도 바로 드갈 수 있는 상태가 아니라면
-                else:
-                    bridge.append(0)
-
-        answer += 1
-        print(sum_bridge, bridge)
-
-    print(answer)
-    return answer
+            answer += min(X_idx[-1], X_idx[-1] - X_idx[1] + 1)
+            return answer
 
 if __name__ == '__main__':
-    solution(2, 10, [7, 4, 5, 6])
-    solution(100, 100, [10])
-    solution(100, 100, [10, 10, 10, 10, 10])
-    solution(2, 10, [7, 3, 5, 6])
+    print(
+        solution("JEROEN")
+        ,solution("JAEAE")
+        ,solution("JAN")
+        ,solution("JAZ")
+        ,solution("AAABBA")
+        ,solution("ZZAAAAZZ")
+        ,solution("BBBAAAB")
+        ,solution("ABABAAAAABA"))
