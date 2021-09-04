@@ -15,9 +15,9 @@ def solution(record):
     IDX = 0
     for i in UID_LIST:
         UID_IDX = list(filter(lambda x: UID_LIST[x] == i, range(len(UID_LIST))))
-        Enter_IDX = list(filter(lambda x: COMMAND_LIST[x] == 'Enter', UID_IDX))
-        Leave_IDX = list(filter(lambda x: COMMAND_LIST[x] == 'Leave', UID_IDX))
-        Change_IDX = list(filter(lambda x: COMMAND_LIST[x] == 'Change', UID_IDX))
+        Enter_IDX = list(filter(lambda x: COMMAND_LIST[x][0] == 'E', UID_IDX))
+        Leave_IDX = list(filter(lambda x: COMMAND_LIST[x][0] == 'L', UID_IDX))
+        Change_IDX = list(filter(lambda x: COMMAND_LIST[x][0] == 'C', UID_IDX))
         print(IDX, UID_IDX, Enter_IDX, Leave_IDX, Change_IDX)
         if UID_IDX[-1] in Enter_IDX: NAME_LIST[IDX] = NAME_LIST[Enter_IDX[-1]]
         if UID_IDX[-1] in Leave_IDX: NAME_LIST[IDX] = NAME_LIST[Enter_IDX[-1]]
@@ -26,18 +26,18 @@ def solution(record):
     print(COMMAND_LIST, UID_LIST, NAME_LIST)
 
     for i in range(IDX):
-        if COMMAND_LIST[i] == 'Enter': answer.append(f"{NAME_LIST[i]}님이 들어왔습니다.")
-        if COMMAND_LIST[i] == 'Leave': answer.append(f"{NAME_LIST[i]}님이 나갔습니다.")
+        if COMMAND_LIST[i][0] == 'E': answer.append(f"{NAME_LIST[i]}님이 들어왔습니다.")
+        if COMMAND_LIST[i][0] == 'L': answer.append(f"{NAME_LIST[i]}님이 나갔습니다.")
 
     print(answer)
     return answer
 
 if __name__ == '__main__':
-    solution(["Enter uid123 A",
-              "Leave uid123",
-              "Enter uid123 AB",
+    solution(["Enter 123 A",
+              "Leave 123",
               "Enter uid1234 B",
               "Enter uid12345 C",
-              "Leave uid123",
               "Leave uid1234",
-              "Leave uid12345"])
+              "Leave uid12345",
+              "Enter uid123 AB",
+              "Change 123 123"])

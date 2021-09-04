@@ -1,40 +1,43 @@
-def solution(name):
-    answer = 0
-    name_list = list(name)
-    alphabet = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+def solution(record):
+    answer = []
+    COMMAND_LIST = []
+    UID_LIST = []
+    NAME_LIST = []
 
-    X_idx = [i for i in range(len(name_list)) if not 'A' in name_list[i]]
-    A_idx = [i for i in range(len(name_list)) if 'A' in name_list[i]]
+    for i in record:
+        temp = i.split()
+        COMMAND_LIST.append(temp[0])
+        UID_LIST.append(temp[1])
+        if len(temp) == 3: NAME_LIST.append(temp[2])
+        else: NAME_LIST.append("")
+    print(COMMAND_LIST, UID_LIST, NAME_LIST)
 
-    for i in name_list:
-        answer += min(alphabet.index(i), 25 - alphabet.index(i) + 1)
+    IDX = 0
+    for i in UID_LIST:
+        UID_IDX = list(filter(lambda x: UID_LIST[x] == i, range(len(UID_LIST))))
+        Enter_IDX = list(filter(lambda x: COMMAND_LIST[x][0] == 'E', UID_IDX))
+        Leave_IDX = list(filter(lambda x: COMMAND_LIST[x][0] == 'L', UID_IDX))
+        Change_IDX = list(filter(lambda x: COMMAND_LIST[x][0] == 'C', UID_IDX))
+        print(IDX, UID_IDX, Enter_IDX, Leave_IDX, Change_IDX)
+        if UID_IDX[-1] in Enter_IDX: NAME_LIST[IDX] = NAME_LIST[Enter_IDX[-1]]
+        if UID_IDX[-1] in Leave_IDX: NAME_LIST[IDX] = NAME_LIST[Enter_IDX[-1]]
+        if UID_IDX[-1] in Change_IDX: NAME_LIST[IDX] = NAME_LIST[Change_IDX[-1]]
+        IDX += 1
+    print(COMMAND_LIST, UID_LIST, NAME_LIST)
 
-    if A_idx == []:
-        answer += X_idx[-1]
-        return answer
+    for i in range(IDX):
+        if COMMAND_LIST[i][0] == 'E': answer.append(f"{NAME_LIST[i]}님이 들어왔습니다.")
+        if COMMAND_LIST[i][0] == 'L': answer.append(f"{NAME_LIST[i]}님이 나갔습니다.")
 
-    if X_idx == []:
-        return answer
-
-    if A_idx[-1] > X_idx[-1]:
-        answer += min(X_idx[-1], A_idx[-1] - X_idx[0] + 1)
-        return answer
-
-    if A_idx[-1] < X_idx[-1]:
-        if A_idx[0] >= 2 and A_idx[0] + len(A_idx) - 1 == A_idx[-1]:
-            answer += min(X_idx[-1], len(X_idx))
-            return answer
-        else:
-            answer += min(X_idx[-1], X_idx[-1] - X_idx[1] + 1)
-            return answer
+    print(answer)
+    return answer
 
 if __name__ == '__main__':
-    print(
-        solution("JEROEN")
-        ,solution("JAEAE")
-        ,solution("JAN")
-        ,solution("JAZ")
-        ,solution("AAABBA")
-        ,solution("ZZAAAAZZ")
-        ,solution("BBBAAAB")
-        ,solution("ABABAAAAABA"))
+    solution(["Enter 123 A",
+              "Leave 123",
+              "Enter uid1234 B",
+              "Enter uid12345 C",
+              "Leave uid1234",
+              "Leave uid12345",
+              "Enter uid123 AB",
+              "Change 123 123"])
