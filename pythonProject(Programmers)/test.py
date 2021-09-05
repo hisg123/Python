@@ -20,7 +20,9 @@ def solution(record):
         Change_IDX = list(filter(lambda x: COMMAND_LIST[x][0] == 'C', UID_IDX))
         print(IDX, UID_IDX, Enter_IDX, Leave_IDX, Change_IDX)
         if UID_IDX[-1] in Enter_IDX: NAME_LIST[IDX] = NAME_LIST[Enter_IDX[-1]]
-        if UID_IDX[-1] in Leave_IDX: NAME_LIST[IDX] = NAME_LIST[Enter_IDX[-1]]
+        if UID_IDX[-1] in Leave_IDX:
+            if Change_IDX != []: NAME_LIST[IDX] = NAME_LIST[max(Enter_IDX[-1], Change_IDX[-1])]
+            else: NAME_LIST[IDX] = NAME_LIST[Enter_IDX[-1]]
         if UID_IDX[-1] in Change_IDX: NAME_LIST[IDX] = NAME_LIST[Change_IDX[-1]]
         IDX += 1
     print(COMMAND_LIST, UID_LIST, NAME_LIST)
@@ -37,7 +39,10 @@ if __name__ == '__main__':
               "Leave 123",
               "Enter uid1234 B",
               "Enter uid12345 C",
+              "Enter 123 인기",
               "Leave uid1234",
               "Leave uid12345",
               "Enter uid123 AB",
-              "Change 123 123"])
+              "Enter ABC 광우",
+              "Change ABC 현주",
+              "Leave ABC"])
