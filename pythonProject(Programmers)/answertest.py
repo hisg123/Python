@@ -1,15 +1,16 @@
 def solution(record):
     answer = []
-    ID_NAME = {}
+    namespace = {}
+    printer = {'Enter':'님이 들어왔습니다.', 'Leave':'님이 나갔습니다.'}
+    for r in record:
+        rr = r.split(' ')
+        if rr[0] in ['Enter', 'Change']:
+            namespace[rr[1]] = rr[2]
 
-    for i in record:
-        temp = i.split()
-        if temp[0] in ['Change', 'Enter']:
-            ID_NAME[temp[1]] = temp[2]
-
-    for i in record:
-        if i.split()[0] == 'Enter': answer.append(f"{ID_NAME[i.split()[1]]}님이 들어왔습니다.")
-        if i.split()[0] == 'Leave': answer.append(f"{ID_NAME[i.split()[1]]}님이 나갔습니다.")
+    print(namespace)
+    for r in record:
+        if r.split(' ')[0] != 'Change':
+            answer.append(namespace[r.split(' ')[1]] + printer[r.split(' ')[0]])
 
     print(answer)
     return answer
