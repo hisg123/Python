@@ -45,7 +45,6 @@ def solution(s):
     answer = min(answer_list)
     return answer
 
-
 if __name__ == '__main__':
     solution("aabbaccc")
     solution("ababcdcdababcdcd")
