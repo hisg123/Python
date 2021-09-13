@@ -19,4 +19,16 @@ def solution(clothes):
         for cloth_type in clothes_type:
             temp *= len(p[cloth_type])+1
         answer += temp - 1
+    print(answer)
     return answer
+
+if __name__ == '__main__':
+    solution([["yellowhat", "headgear"],
+              ["bluesunglasses", "eyewear"],
+              ["sunglasses", "eyewear"],
+              ["green_turban", "headgear"],
+              ["blond","hair"],
+              ["black","hair"]])
+
+    solution([["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"]])
+    solution([["crowmask", "face"], ["bluesunglasses", "face"], ["smoky_makeup", "face"]])
