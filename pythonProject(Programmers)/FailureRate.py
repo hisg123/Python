@@ -9,13 +9,13 @@ def solution(N, stages):
         if denom == 0: FRbyStage[i] = 0
         else:
             FRbyStage[i] = moleclue/denom
-            # print(moleclue, denom, FRbyStage)
+            print(moleclue, denom, FRbyStage)
             denom -= moleclue
 
     #sort by dict(hash)_value
     FRbyStage = sorted(FRbyStage.items(), key=lambda value: value[1], reverse=True)
     for key,value in FRbyStage: answer.append(key)
-    # print(answer)
+    print(answer)
     return answer
 
 if __name__ == "__main__":
