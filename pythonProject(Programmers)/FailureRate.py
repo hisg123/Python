@@ -2,20 +2,21 @@ def solution(N, stages):
     answer = []
     FRbyStage = dict()
     denom = len(stages)
+    info = [0]*(N+2)
+
+    for stage in stages:
+        info[stage] +=1
 
     for i in range(1, N+1):
-        moleclue = stages.count(i)
+        moleclue = info[i]
         #if no one reached i-stage
         if denom == 0: FRbyStage[i] = 0
         else:
             FRbyStage[i] = moleclue/denom
-            print(moleclue, denom, FRbyStage)
             denom -= moleclue
 
     #sort by dict(hash)_value
-    FRbyStage = sorted(FRbyStage.items(), key=lambda value: value[1], reverse=True)
-    for key,value in FRbyStage: answer.append(key)
-    print(answer)
+    for item in sorted(FRbyStage.items(), key=lambda value: value[1], reverse=True): answer.append(item[0])
     return answer
 
 if __name__ == "__main__":
