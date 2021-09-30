@@ -1,0 +1,29 @@
+.navbar-nav me-auto mb-2 mb-lg-0 {
+    text-align: right;
+}
+
+.navbar-brand {
+    font-family: 'Yaldevi', sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+    color: black;
+}
+
+.container-fluid {
+    font-family: 'Yaldevi', sans-serif;
+}
+
+
+#main {
+    padding-top: 50px;
+    width: 100vw;
+    height:100vh;
+}
+
+#end_bar {
+    background = gray;
+    font-family: 'Yaldevi', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+
