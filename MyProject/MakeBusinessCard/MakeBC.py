@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import *
 import PyQt5.uic
 import shutil
 from tqdm import tqdm
+from fpdf import FPDF
 
 #pyrcc5 -o MBC_res_rc.py MBC_res.qrc
 
@@ -18,14 +19,21 @@ def SplitKrEn(string_):
     list_ = str(string_).split('/')
     return list_
 
+def AddingMsg(message_, yPos, font, fontsize, draw):
+    color = 'rgb(0, 0, 0)'
+    malgun = ImageFont.truetype(font, fontsize)
+    w, h = malgun.getsize(message_)
+    xPos = (821 - w) / 2
+    draw.text((xPos, yPos), message_, fill=color, font=malgun)
+
 def TexttoIMG(name, position, department, location, tell, cell, email, dir):
     # [일반] 텍스트 이미지에 넣기
-    width = 718
-    height = 398
+    width = 821
+    height = 455
 
     image = Image.new('RGB', (width, height), (255, 255, 255))
 
-    tempimg = Image.open("front_ATK.png")
+    tempimg = Image.open("front_ATK_border_tab.png")
     tempidback = tempimg.resize((width, height), Image.NEAREST)
     tempidback.save('tempidback.png')
     tempidback = Image.open('tempidback.png')
@@ -40,8 +48,7 @@ def TexttoIMG(name, position, department, location, tell, cell, email, dir):
     location_list = SplitKrEn(location)
 
     # adding name
-    (x, y) = (0, 160)
-    W = width
+    (x, y) = (0, 200)
 
     username = name_list[0]
     img_username = ''
@@ -63,60 +70,107 @@ def TexttoIMG(name, position, department, location, tell, cell, email, dir):
     else:
         message = username
 
-    color = 'rgb(0, 0, 0)'
-    malgun = ImageFont.truetype('/malgunbd.ttf', 25)
-    w, h = malgun.getsize(message)
-    start_xPos = (W - w) / 2
     start_Ypos = y
-    draw.text((start_xPos, y), message, fill=color, font=malgun)
+    font = 'malgunbd.ttf'
+    fontsize = 30
+    AddingMsg(message, start_Ypos, font, fontsize, draw)
 
     #adding department | position
     message = f"{department_list[0]} | {position_list[0]}"
-    color = 'rgb(0, 0, 0)'
-    malgun = ImageFont.truetype('/malgun.ttf', 18)
-    start_Ypos += 40
-    w, h = malgun.getsize(message)
-    start_xPos = (W - w) / 2
-    draw.text((start_xPos, start_Ypos), message, fill=color, font=malgun)
+    start_Ypos += 50
+    font = 'malgun.ttf'
+    fontsize = 18
+    AddingMsg(message, start_Ypos, font, fontsize, draw)
 
     #adding ATK_LABEL
     message = "앰코테크놀로지코리아주식회사"
-    color = 'rgb(0, 0, 0)'
-    malgun = ImageFont.truetype('/malgunbd.ttf', 18)
     start_Ypos += 50
-    w, h = malgun.getsize(message)
-    start_xPos = (W - w) / 2
-    draw.text((start_xPos, start_Ypos), message, fill=color, font=malgun)
+    font = 'malgunbd.ttf'
+    fontsize = 18
+    AddingMsg(message, start_Ypos, font, fontsize, draw)
 
     # adding location
     message = location_list[0]
-    color = 'rgb(0, 0, 0)'
-    malgun = ImageFont.truetype('/malgun.ttf', 18)
     start_Ypos += 30
-    w, h = malgun.getsize(message)
-    start_xPos = (W - w) / 2
-    draw.text((start_xPos, start_Ypos), message, fill=color, font=malgun)
+    font = 'malgun.ttf'
+    fontsize = 18
+    AddingMsg(message, start_Ypos, font, fontsize, draw)
 
     # adding tell&cell
     message = f"tel {tell} | cell {cell}"
-    color = 'rgb(0, 0, 0)'
-    malgun = ImageFont.truetype('/malgun.ttf', 18)
     start_Ypos += 30
-    w, h = malgun.getsize(message)
-    start_xPos = (W - w) / 2
-    draw.text((start_xPos, start_Ypos), message, fill=color, font=malgun)
+    font = 'malgun.ttf'
+    fontsize = 18
+    AddingMsg(message, start_Ypos, font, fontsize, draw)
 
     #adding email
     message = email
-    color = 'rgb(0, 0, 0)'
-    malgun = ImageFont.truetype('/malgun.ttf', 18)
     start_Ypos += 30
-    w, h = malgun.getsize(message)
-    start_xPos = (W - w) / 2
-    draw.text((start_xPos, start_Ypos), message, fill=color, font=malgun)
+    font = 'malgun.ttf'
+    fontsize = 18
+    AddingMsg(message, start_Ypos, font, fontsize, draw)
 
     image.save(f"{dir}/{name_list[0]}_front.png")
-    # Save the edited image
+
+def imageMerge():
+    IMG_LIST = []
+    FILE_LIST = os.listdir(path)
+
+    for file in FILE_LIST:
+        ext, ext_png = os.path.splitext(file)
+        if ext[0:9] == 'mergedPDF':
+            pass
+        elif ext_png == '.png':
+            IMG_LIST.append(file)
+
+    TotalSize_x = 2463
+    TotalSize_y = 1365
+    Size_x = 821
+    Size_y = 455
+    Merge_image = []
+
+    if len(IMG_LIST)%9: LEN = len(IMG_LIST)//9 + 1
+    else: LEN = len(IMG_LIST)//9
+    # print(LEN)
+
+    for i in range(LEN):
+        Merge_image.append(Image.new("RGB", (TotalSize_x, TotalSize_y), (255, 255, 255)))
+    print(Merge_image)
+
+    file_no = 0
+    cnt = 0
+    for index in range(len(IMG_LIST)):
+        if cnt == 9:
+            Merge_image[file_no].save(f"{path}/mergedPDF_{file_no}.png", "PNG")
+            file_no += 1
+            cnt = 0
+
+        Y_idx = index//3 - 3*file_no
+        # print(index, Y_idx, file_no)
+        merge_area = (((index%3) * Size_x), (Y_idx * Size_y), (((index%3)+1) *Size_x), ((Y_idx+1) * Size_y))
+        PasteImage = Image.open(f"{path}/{IMG_LIST[index]}")
+        Merge_image[file_no].paste(PasteImage, merge_area)
+        if file_no == LEN-1:
+            Merge_image[file_no].save(f"{path}/mergedPDF_{file_no}.png", "PNG")
+        cnt +=1
+
+def PdfConvert(directory):
+    MERGED_IMG_LIST = []
+    FILE_LIST = os.listdir(path)
+    for file in FILE_LIST:
+        ext = os.path.splitext(file)[0]
+        if ext[0:9] == 'mergedPDF':
+            MERGED_IMG_LIST.append(file)
+
+    i = 0
+    for merged_image in tqdm(MERGED_IMG_LIST, desc='이미지 파일을 PDF로 저장 중입니다.', leave=False):
+        pdf = FPDF(orientation='L', unit='mm', format='A4')
+        pdf.add_page()
+
+        merged_image = f'{path}/{merged_image}'
+        pdf.image(merged_image, x=0, y=0, w=pdf.w-30, h=pdf.h-70)
+        pdf.output(f'{directory}/{today}_{i}.pdf', 'F')
+        i += 1
 
 ##오늘날짜로 폴더생성
 def createFolder(directory):
@@ -169,13 +223,17 @@ class MyWindow(QMainWindow, form_class):
 
         for i in tqdm(range(len(name)), desc = '명함 제작중입니다.', leave= False):
             TexttoIMG(name[i], position[i], department[i], location[i], tell[i], cell[i], email[i], path)
-        try:
-            for i in tqdm(range(len(name)), desc = '지정된 경로에 명함 제작중입니다.', leave= False) :
-                TexttoIMG(name[i], position[i], department[i], location[i], tell[i], cell[i], email[i], OutputPath)
-            QMessageBox.about(self, "message", "저장경로 폴더, image 폴더 안에 PDF 파일이 생성되었습니다")
 
-        except:
-            QMessageBox.about(self, "message", "image 폴더 안에 PDF 파일이 생성되었습니다")
+        imageMerge()
+        PdfConvert(path)
+
+        # try:
+        #     for i in tqdm(range(len(name)), desc = '지정된 경로에 명함 제작중입니다.', leave= False) :
+        #         TexttoIMG(name[i], position[i], department[i], location[i], tell[i], cell[i], email[i], OutputPath)
+        #     QMessageBox.about(self, "message", "저장경로 폴더, image 폴더 안에 PDF 파일이 생성되었습니다")
+        #
+        # except:
+        #     QMessageBox.about(self, "message", "image 폴더 안에 PDF 파일이 생성되었습니다")
 
 
 if __name__ == '__main__':
