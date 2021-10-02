@@ -12,18 +12,6 @@ import getpass
 
 form_class = PyQt5.uic.loadUiType("test.ui")[0]
 
-#
-HRD_ID = "hisg1201"
-HRD_PW = "h108109h!@#"
-
-#
-OJT_ID = "hisg1201"
-OJT_PW = "h108109h"
-
-#
-PMS_ID = "20605"
-PMS_PW = "H108109h!@#"
-
 today_Mon = datetime.today().strftime('%m')
 YEAR, WEEK, DAY = datetime.now().isocalendar()
 path = "./testui"
