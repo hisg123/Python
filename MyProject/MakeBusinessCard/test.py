@@ -26,8 +26,7 @@ def AddingMsg(message_, yPos, font, fontsize, draw):
     xPos = (821 - w) / 2
     draw.text((xPos, yPos), message_, fill=color, font=malgun)
 
-def TexttoIMG(name, position, department, location, tell, cell, email, dir):
-    # [일반] 텍스트 이미지에 넣기
+def TexttoIMG(name, position, department, location, tell, cell, email):
     width = 821
     height = 455
 
@@ -82,7 +81,7 @@ def TexttoIMG(name, position, department, location, tell, cell, email, dir):
     fontsize = 18
     AddingMsg(message, start_Ypos, font, fontsize, draw)
 
-    #adding ATK_LABEL
+    #adding LABEL
     message = "Google Inc™"
     start_Ypos += 50
     font = 'malgunbd.ttf'
@@ -110,7 +109,7 @@ def TexttoIMG(name, position, department, location, tell, cell, email, dir):
     fontsize = 18
     AddingMsg(message, start_Ypos, font, fontsize, draw)
 
-    image.save(f"{dir}/{name_list[0]}_front.png")
+    image.save(f"{path}/{name_list[0]}_front.png")
 
 def imageMerge():
     IMG_LIST = []
@@ -218,7 +217,7 @@ class MyWindow(QMainWindow, form_class):
         email = frames['email']
 
         for i in tqdm(range(len(name)), desc = '명함 제작중입니다.', leave= False):
-            TexttoIMG(name[i], position[i], department[i], location[i], tell[i], cell[i], email[i], path)
+            TexttoIMG(name[i], position[i], department[i], location[i], tell[i], cell[i], email[i])
 
         imageMerge()
         PdfConvert(path)
