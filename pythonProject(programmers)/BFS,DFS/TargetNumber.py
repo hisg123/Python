@@ -1,16 +1,17 @@
 #BFS
 def solution(numbers, target):
     answer = 0
-    leaves = [0]
-    for num in numbers:
-        tmp = []
-        for parent in leaves:
-            tmp.append(parent + num)
-            tmp.append(parent - num)
-        leaves = tmp
-    for leaf in leaves:
-        if leaf == target:
-            answer += 1
+    result = [0]
+    for number in numbers:
+        temp_sum = []
+        for res in result:
+            temp_sum.append(res + number)
+            temp_sum.append(res - number)
+        result = temp_sum
+
+    for i in result:
+        if i == target: answer += 1
+
     print(answer)
     return answer
 
