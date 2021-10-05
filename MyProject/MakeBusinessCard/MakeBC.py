@@ -83,7 +83,7 @@ def TexttoIMG(name, position, department, location, tell, cell, email, dir):
     AddingMsg(message, start_Ypos, font, fontsize, draw)
 
     #adding ATK_LABEL
-    message = "Google Inc™"
+    message = "Google Inc"
     start_Ypos += 50
     font = 'malgunbd.ttf'
     fontsize = 18
@@ -118,10 +118,8 @@ def imageMerge():
 
     for file in FILE_LIST:
         ext, ext_png = os.path.splitext(file)
-        if ext[0:9] == 'mergedPDF':
-            pass
-        elif ext_png == '.png':
-            IMG_LIST.append(file)
+        if ext[0:9] == 'mergedPDF': pass
+        elif ext_png == '.png': IMG_LIST.append(file)
 
     TotalSize_x = 2463
     TotalSize_y = 1365
@@ -129,12 +127,10 @@ def imageMerge():
     Size_y = 455
     Merge_image = []
 
-
     LEN = len(IMG_LIST)//9
     if len(IMG_LIST)%9: LEN += 1
 
-    for i in range(LEN):
-        Merge_image.append(Image.new("RGB", (TotalSize_x, TotalSize_y), (255, 255, 255)))
+    for i in range(LEN): Merge_image.append(Image.new("RGB", (TotalSize_x, TotalSize_y), (255, 255, 255)))
 
     file_no = 0
     cnt = 0
@@ -147,13 +143,11 @@ def imageMerge():
         #해당 사진의 X,Y 위치
         Y_idx = index//3 - 3*file_no
         X_idx = index%3
-
         merge_area = ((X_idx * Size_x), (Y_idx * Size_y), ((X_idx+1) * Size_x), ((Y_idx+1) * Size_y))
         PasteImage = Image.open(f"{path}/{IMG_LIST[index]}")
         Merge_image[file_no].paste(PasteImage, merge_area)
 
-        if file_no == LEN-1:
-            Merge_image[file_no].save(f"{path}/mergedPDF_{file_no}.png", "PNG")
+        if file_no == LEN-1: Merge_image[file_no].save(f"{path}/mergedPDF_{file_no}.png", "PNG")
         cnt +=1
 
 def PdfConvert(directory):
