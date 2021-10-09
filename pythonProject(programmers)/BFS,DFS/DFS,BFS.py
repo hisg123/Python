@@ -11,7 +11,7 @@ def BFS(graph, root):
             queue.extend(graph[n])
         # print(queue, graph[n], visited)
 
-    answer = " ".join(visited)
+    answer = visited
     return answer
 
 def DFS(graph, root):
@@ -24,23 +24,15 @@ def DFS(graph, root):
             visited.append(n)
             stack.extend(reversed(graph[n]))
 
-    answer = " ".join(visited)
+    answer = visited
     return answer
 
-N, M, V = input().split()
-graph = defaultdict(list)
-temp = []
-for i in range(int(M)):
-    a, b = input().split()
-    temp.append((a,b))
-    temp.append((b,a))
-
-for key, value in temp:
-    graph[key].append(value)
-
-for key, value in graph.items():
-    graph[key].sort()
-
-print(DFS(graph, V))
-print(BFS(graph, V))
+if __name__ == '__main__':
+    graph = defaultdict(list)
+    graph = {1: [2],
+             2: [1,3],
+             3: [2]}
+    root = 1
+    print(DFS(graph, root))
+    #print(BFS(graph, root))
 
