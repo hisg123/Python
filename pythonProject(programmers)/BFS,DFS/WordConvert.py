@@ -4,33 +4,18 @@ def CalcStrSubLen(cp_word, word):
     a_list = list(cp_word)
     b_list = list(word)
 
-    ap = {}
-    bp = {}
-
-    idx = 0
-    for a in a_list:
-        ap[idx] = a
-        idx += 1
-
-    idx = 0
     for b in b_list:
-        bp[idx] = b
-        idx += 1
+        if b in a_list:
+            a_list.remove(b)
 
-    temp_key = []
-    for a_key, a_value in ap.items():
-        for b_key, b_value in bp.items():
-            if b_key == a_key and b_value == a_value:
-                temp_key.append(a_key)
-
-    return len(a_list)-len(temp_key)
+    return len(a_list)
 
 def MakeGraph(words):
     graph = defaultdict(list)
     cp_words = copy.deepcopy(words)
     for word in words:
         for cp_word in cp_words:
-            if CalcStrSubLen(cp_word, word) == 1: #
+            if CalcStrSubLen(cp_word, word) == 1:
                  graph[word].append(cp_word)
     print(graph)
     return graph
@@ -89,6 +74,5 @@ def solution(begin, target, words):
 
 if __name__ == '__main__':
     solution("hit", "cog", ["hot", "dot", "dog", "lot", "cog"])
-    # solution("hit", "cog", ["hot", "dot", "dog", "lot", "log"])
-    # solution("hit", "lzt", ["hot", "dot", "dog", "lot", "zot", "lzt"])
-    # solution("hit", "cog", ["hot", "dot", "dog", "tog", "vog", "lot", "cog"])
+    solution("hit", "cog", ["hot", "dot", "dog", "lot", "log"])
+    solution("hit", "lzt", ["hot", "dot", "dog", "lot", "zot", "lzt"])

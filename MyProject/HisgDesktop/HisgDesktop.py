@@ -5,10 +5,8 @@ from selenium import webdriver
 from datetime import datetime
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui, QtWidgets
-import pandas as pd
-import win32com.client
-import os
-import getpass
+
+PMS_ID = ""
 
 form_class = PyQt5.uic.loadUiType("test.ui")[0]
 
